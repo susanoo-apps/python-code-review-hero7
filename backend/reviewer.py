@@ -38,6 +38,7 @@ class Finding(BaseModel):
     rule_id: str  # always a policy rule id
     severity: str
     message: str
+    suggested_fix: str = ""
 
 
 class ReviewerNotConfigured(Exception):

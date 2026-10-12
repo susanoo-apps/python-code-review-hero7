@@ -28,7 +28,7 @@ def create_app(client: Any | None = None) -> FastAPI:
     async def plain_validation_error(_: Request, __: RequestValidationError) -> JSONResponse:
         return JSONResponse(
             status_code=422,
-            content={"detail": "That request was not understood. Send JSON like {\"diff\": \"...\"}."},
+            content={"detail": "That request was not understood. Send JSON like {\"diff\": \"...\"} or {\"pr_url\": \"...\"}."},
         )
 
     @app.get("/health")

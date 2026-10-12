@@ -28,7 +28,9 @@
     border: 1px solid var(--line); background: var(--card); color: var(--text);
     font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
-  textarea:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  input[type=url] { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--text); font: inherit; min-height: 44px; }
+  .fix { margin: 6px 0 0; color: var(--muted); overflow-wrap: anywhere; }
+  input:focus-visible, textarea:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 24px; }
   button { font: inherit; padding: 10px 18px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer; min-height: 44px; }
   button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
@@ -56,7 +58,9 @@
   <h1>Code review</h1>
   <p class="lead">Paste a diff and get a review against your team's rules.</p>
 
-  <label for="diff">Your diff</label>
+  <label for="pr">GitHub pull request link (optional)</label>
+  <input id="pr" type="url" placeholder="https://github.com/owner/repo/pull/123" autocomplete="off">
+  <label for="diff" style="margin-top:12px">Or paste your diff</label>
   <textarea id="diff" spellcheck="false" placeholder="Paste the output of git diff here"></textarea>
   <div class="actions">
     <button id="go" class="primary" type="button">Review this diff</button>
@@ -72,7 +76,8 @@
 <script>
 (function () {
   var diffEl = document.getElementById("diff");
-  var goBtn = document.getElementById("go");
+  var prEl = document.getElementById("pr");
+  var goBtn =document.getElementById("go");
   var statusEl = document.getElementById("status");
   var resultsEl = document.getElementById("results");
 
@@ -125,6 +130,7 @@
       meta.appendChild(el("span", "rule", f.rule_id));
       item.appendChild(meta);
       item.appendChild(el("p", "message", f.message));
+      if (f.suggested_fix) item.appendChild(el("p", "fix", "Suggested fix: " + f.suggested_fix));
       list.appendChild(item);
     });
     var count = findings.length + (findings.length === 1 ? " problem" : " problems") + " found";
@@ -133,8 +139,9 @@
 
   async function run() {
     var diff = diffEl.value.trim();
-    if (!diff) {
-      setStatus("Paste a diff first, then press \"Review this diff\".", true);
+    var pr = prEl.value.trim();
+    if (!diff && !pr) {
+      setStatus("Paste a diff or a GitHub pull request link first, then press \"Review this diff\".", true);
       return;
     }
     goBtn.disabled = true;
@@ -144,7 +151,7 @@
       var res = await fetch("review", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ diff: diff })
+        body: JSON.stringify(diff ? { diff: diff } : { pr_url: pr })
       });
       var data = null;
       try { data = await res.json(); } catch (e) { /* not JSON */ }
@@ -167,7 +174,7 @@
   goBtn.addEventListener("click", run);
   document.getElementById("example").addEventListener("click", function () { diffEl.value = EXAMPLE; setStatus("", false); });
   document.getElementById("clear").addEventListener("click", function () {
-    diffEl.value = ""; setStatus("", false);
+    diffEl.value = ""; prEl.value = ""; setStatus("", false);
     showEmpty("Your review will appear here. Paste a diff above and press \"Review this diff\".");
   });
 })();
