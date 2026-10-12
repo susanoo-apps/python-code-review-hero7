@@ -1,0 +1,6 @@
+{
+  "files": {
+    "lib/notify/email_sender.py": "import os\n\nimport httpx\n\nMAIL_API_URL = os.environ.get(\"MAIL_API_URL\", \"https://mail.example.com/send\")\n\ndef build_payload(to: str, subject: str) -> dict:\n    return {\"to\": to, \"subject\": subject}\n\n\ndef send_welcome(to: str) -> None:\n    httpx.post(MAIL_API_URL, json=build_payload(to, \"Welcome\"))\n"
+  },
+  "notes": "A small email sender module that builds mail payloads and posts them to an outside mail API."
+}

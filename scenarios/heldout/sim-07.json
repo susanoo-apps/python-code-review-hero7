@@ -1,0 +1,20 @@
+{
+  "id": "sim-07",
+  "kind": "planted",
+  "split": "heldout",
+  "title": "A developer adds a new web route that clears out old job records and has no login check. Expected: blocked under the rule requiring a login check on every web endpoint.",
+  "diff": "--- a/app/jobs/cleanup.py\n+++ b/app/jobs/cleanup.py\n@@ -9,3 +9,9 @@\n @router.get(\"/jobs/status\")\n def job_status(user=Depends(require_user)):\n     return jobs.status()\n+\n+\n+@router.delete(\"/jobs/cleanup\")\n+def run_cleanup(older_than_days: int = 30):\n+    removed = jobs.purge_old(older_than_days)\n+    return {\"removed\": removed}\n",
+  "answer_key": {
+    "expected": [
+      {
+        "file": "app/jobs/cleanup.py",
+        "line_start": 14,
+        "line_end": 15,
+        "rule_id": "auth-required",
+        "severity": "block"
+      }
+    ],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

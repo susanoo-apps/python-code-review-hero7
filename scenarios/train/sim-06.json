@@ -1,0 +1,20 @@
+{
+  "id": "sim-06",
+  "kind": "planted",
+  "split": "train",
+  "title": "A developer logs the visitor's IP address each time a customer record is viewed. Expected: blocked under the rule against personal data in logs.",
+  "diff": "--- a/api/v2/customers.py\n+++ b/api/v2/customers.py\n@@ -11,3 +11,4 @@\n def get_customer(customer_id: int, request: Request, user=Depends(require_user)):\n     customer = customers.get(customer_id)\n+    logger.info(\"Customer %s viewed from %s\", customer_id, request.client.host)\n     return customer\n",
+  "answer_key": {
+    "expected": [
+      {
+        "file": "api/v2/customers.py",
+        "line_start": 13,
+        "line_end": 13,
+        "rule_id": "no-pii-logs",
+        "severity": "block"
+      }
+    ],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

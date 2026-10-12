@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/utils/export_csv.py": "import csv\nimport io\n\n\ndef rows_to_csv(rows: list[dict]) -> str:\n    buf = io.StringIO()\n    writer = csv.DictWriter(buf, fieldnames=list(rows[0].keys()))\n    writer.writeheader()\n    writer.writerows(rows)\n    return buf.getvalue()\n\n\ndef csv_filename(report: str, day: str) -> str:\n    return f\"{report}_{day}.csv\"\n"
+  },
+  "notes": "A utility module that turns rows into CSV text and names the file."
+}

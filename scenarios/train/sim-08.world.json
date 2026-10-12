@@ -1,0 +1,6 @@
+{
+  "files": {
+    "core/payments/refunds.py": "from core.db import connect\n\n\ndef find_refund(refund_id: int):\n    conn = connect()\n    return conn.execute(\"SELECT * FROM refunds WHERE id = %s\", (refund_id,)).fetchone()\n\n\ndef refunds_for_order(order_ref: str):\n    conn = connect()\n    query = \"SELECT * FROM refunds WHERE order_ref = '\" + order_ref + \"'\"\n    return conn.execute(query).fetchall()\n"
+  },
+  "notes": "A payments module that looks up refunds in the database."
+}

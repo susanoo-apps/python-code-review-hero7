@@ -1,0 +1,6 @@
+{
+  "files": {
+    "services/auth/session.py": "from __future__ import annotations\n\nfrom dataclasses import dataclass\n\nfrom app.services import session_store as store\n\n\n@dataclass\nclass Session:\n    token: str\n    user_id: str\n    expires_at: int\n\n\ndef current_session(token: str) -> Session | None:\n    return store.find(token)\n\n\ndef expire_all(user_id: str) -> int:\n    return store.delete_where(user_id=user_id)\n"
+  },
+  "notes": "A session module that reads sessions from the in-house session store."
+}

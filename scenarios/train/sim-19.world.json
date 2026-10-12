@@ -1,0 +1,6 @@
+{
+  "files": {
+    "backend/users/profile.py": "from fastapi import APIRouter, Depends\n\nfrom app.auth import require_user\nfrom app.services import users\n\nrouter = APIRouter()\n\n\n@router.get(\"/users/me\")\ndef read_me(user=Depends(require_user)):\n    \"\"\"Return the signed-in user's profile.\"\"\"\n    return users.get(user.id)\n"
+  },
+  "notes": "A small users module with one authenticated profile endpoint."
+}

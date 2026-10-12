@@ -1,0 +1,14 @@
+{
+  "id": "sim-13",
+  "kind": "edge",
+  "split": "train",
+  "title": "A developer adds a helper that removes all sessions for a user through the in-house session store. Expected: allowed, since this is an internal call and not an outside service.",
+  "diff": "--- a/services/auth/session.py\n+++ b/services/auth/session.py\n@@ -14,3 +14,7 @@\n \n def current_session(token: str) -> Session | None:\n     return store.find(token)\n+\n+\n+def expire_all(user_id: str) -> int:\n+    return store.delete_where(user_id=user_id)\n",
+  "answer_key": {
+    "expected": [],
+    "must_not_flag": [
+      "external-call-errors"
+    ]
+  },
+  "approved_by_user": false
+}

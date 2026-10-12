@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/jobs/cleanup.py": "from fastapi import APIRouter, Depends\n\nfrom app.auth import require_user\nfrom app.services import jobs\n\nrouter = APIRouter()\n\n\n@router.get(\"/jobs/status\")\ndef job_status(user=Depends(require_user)):\n    return jobs.status()\n\n\n@router.delete(\"/jobs/cleanup\")\ndef run_cleanup(older_than_days: int = 30):\n    removed = jobs.purge_old(older_than_days)\n    return {\"removed\": removed}\n"
+  },
+  "notes": "A small job-status router where a cleanup route is being added."
+}

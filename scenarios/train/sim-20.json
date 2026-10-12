@@ -1,0 +1,12 @@
+{
+  "id": "sim-20",
+  "kind": "clean",
+  "split": "train",
+  "title": "A developer tidies a CSV export helper by adding a short description and renaming a loop variable. Expected: no issues, since behaviour is unchanged.",
+  "diff": "--- a/app/utils/export_csv.py\n+++ b/app/utils/export_csv.py\n@@ -5,7 +5,8 @@\n def rows_to_csv(rows, columns):\n+    \"\"\"Serialise rows as CSV text, with a header line built from columns.\"\"\"\n     buf = io.StringIO()\n     writer = csv.writer(buf)\n     writer.writerow(columns)\n-    for r in rows:\n-        writer.writerow([r[c] for c in columns])\n+    for row in rows:\n+        writer.writerow([row[c] for c in columns])\n     return buf.getvalue()\n",
+  "answer_key": {
+    "expected": [],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

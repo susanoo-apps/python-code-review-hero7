@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/utils/text.py": "def normalize_name(s):\n    return s.strip()\n\n\ndef slugify(value):\n    \"\"\"Turn a title into a URL-friendly slug.\"\"\"\n    value = value.lower().strip()\n    chars = []\n    for ch in value:\n        if ch.isalnum():\n            chars.append(ch)\n        elif ch in (\" \", \"-\", \"_\"):\n            chars.append(\"-\")\n    slug = \"\".join(chars)\n    while \"--\" in slug:\n        slug = slug.replace(\"--\", \"-\")\n    return slug.strip(\"-\")\n\n\ndef truncate(text, limit=80):\n    \"\"\"Shorten text to limit characters, adding an ellipsis when cut.\"\"\"\n    if len(text) <= limit:\n        return text\n    return text[: limit - 3].rstrip() + \"...\"\n\n\ndef collapse_whitespace(text):\n    return \" \".join(text.split())\n"
+  },
+  "notes": "A small text utilities module with name normalising, slug and truncation helpers."
+}

@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/services/geocode.py": "import requests\n\nGEOCODER_URL = \"https://geocode.example.com/search\"\n\n\ndef normalise(address: str) -> str:\n    return \" \".join(address.split()).title()\n\n\ndef lookup_address(address: str) -> dict:\n    response = requests.get(GEOCODER_URL, params={\"q\": normalise(address)})\n    return response.json()\n"
+  },
+  "notes": "A geocoding service module with an address normaliser and a new outside lookup."
+}

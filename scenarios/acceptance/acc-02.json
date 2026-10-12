@@ -1,0 +1,20 @@
+{
+  "id": "acc-02",
+  "kind": "planted",
+  "split": "acceptance",
+  "title": "A developer adds a new API endpoint for reviews with no login check. Expected: blocked (block) under Every endpoint needs auth.",
+  "diff": "--- a/app/routes/reviews.py\n+++ b/app/routes/reviews.py\n@@ -1,3 +1,7 @@\n from fastapi import APIRouter\n \n router = APIRouter()\n+\n+@router.get(\"/reviews/{review_id}\")\n+def get_review(review_id: int):\n+    return load_review(review_id)\n",
+  "answer_key": {
+    "expected": [
+      {
+        "file": "app/routes/reviews.py",
+        "line_start": 5,
+        "line_end": 7,
+        "rule_id": "auth-required",
+        "severity": "block"
+      }
+    ],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

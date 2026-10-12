@@ -1,0 +1,7 @@
+{
+  "files": {
+    "app/config.py": "import os\n\nDATABASE_URL = os.environ[\"DATABASE_URL\"]\nSMTP_HOST = \"smtp.example.com\"\nSMTP_PASSWORD = \"Tr0ub4dor-prod-mailer-2026\"\n",
+    "app/db/exports.py": "from app.db.connection import get_connection\n\n\ndef export_all():\n    conn = get_connection()\n    return conn.execute(\"SELECT id, email FROM users\").fetchall()\n\n\ndef export_by_domain(domain: str):\n    conn = get_connection()\n    sql = \"SELECT id, email FROM users WHERE email LIKE '%%@%s'\" % domain\n    return conn.execute(sql).fetchall()\n"
+  },
+  "notes": "A config module with mail settings and a database export helper that lists users."
+}

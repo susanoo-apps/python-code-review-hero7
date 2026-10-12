@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/orders.py": "import logging\n\nfrom app.services.orders import build\n\nlog = logging.getLogger(__name__)\n\n\n# Order creation helpers.\n\ndef create_order(user, items):\n    order = build(user, items)\n    log.info(\"order for %s\", user.email)\n    return order\n"
+  },
+  "notes": "A small orders module that builds an order for a user."
+}

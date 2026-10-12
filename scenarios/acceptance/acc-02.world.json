@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/routes/reviews.py": "from fastapi import APIRouter\n\nrouter = APIRouter()\n\n@router.get(\"/reviews/{review_id}\")\ndef get_review(review_id: int):\n    return load_review(review_id)\n"
+  },
+  "notes": "A small reviews routes module that exposes one endpoint to fetch a review."
+}

@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/db/reports.py": "from app.db.connection import get_connection\n\n\ndef count_orders(customer_id: int) -> int:\n    conn = get_connection()\n    row = conn.execute(\"SELECT COUNT(*) FROM orders WHERE customer_id = %s\", (customer_id,)).fetchone()\n    return row[0]\n\n\ndef orders_for_customer(customer_id: int, status: str):\n    conn = get_connection()\n    query = (\n        \"SELECT id, total FROM orders \"\n        \"WHERE customer_id = %s AND status = %s \"\n        \"ORDER BY created_at DESC\"\n    )\n    return conn.execute(query, (customer_id, status)).fetchall()\n"
+  },
+  "notes": "A reports database module where all queries pass values as parameters."
+}

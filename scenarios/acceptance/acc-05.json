@@ -1,0 +1,20 @@
+{
+  "id": "acc-05",
+  "kind": "planted",
+  "split": "acceptance",
+  "title": "A developer calls an outside rates service without handling failures. Expected: warned (warn) under Handle errors on external calls.",
+  "diff": "--- a/app/services/pricing.py\n+++ b/app/services/pricing.py\n@@ -2,3 +2,5 @@\n import httpx\n \n def fetch_rate(currency):\n+    resp = httpx.get(f\"https://rates.example.com/{currency}\")\n+    return resp.json()[\"rate\"]\n",
+  "answer_key": {
+    "expected": [
+      {
+        "file": "app/services/pricing.py",
+        "line_start": 5,
+        "line_end": 6,
+        "rule_id": "external-call-errors",
+        "severity": "warn"
+      }
+    ],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

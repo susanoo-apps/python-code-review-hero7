@@ -1,0 +1,6 @@
+{
+  "files": {
+    "core/payments/refunds.py": "from app.services import ledger\n\n\ndef issue_refund(payment_id: str, amount_cents: int) -> dict:\n    \"\"\"Issue a refund for part or all of a payment, never more than was paid.\"\"\"\n    payment = ledger.find(payment_id)\n    if amount_cents > payment.amount_cents:\n        raise ValueError(\"refund exceeds payment\")\n    return ledger.record_refund(payment_id, amount_cents)\n"
+  },
+  "notes": "A small refunds module with one function that checks the refund amount against the payment."
+}

@@ -1,0 +1,12 @@
+{
+  "id": "acc-09",
+  "kind": "clean",
+  "split": "acceptance",
+  "title": "A developer renames a text helper from trim_name to normalize_name. Expected: nothing is flagged.",
+  "diff": "--- a/app/utils/text.py\n+++ b/app/utils/text.py\n@@ -1,2 +1,2 @@\n-def trim_name(s):\n+def normalize_name(s):\n     return s.strip()\n",
+  "answer_key": {
+    "expected": [],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

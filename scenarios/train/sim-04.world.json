@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/db/queries.py": "from app.db.connection import get_connection\n\nREPLICA_PASSWORD = \"xK9-replica-pw-7741\"\n\n\ndef count_orders(customer_id: int) -> int:\n    conn = get_connection()\n    row = conn.execute(\"SELECT COUNT(*) FROM orders WHERE customer_id = %s\", (customer_id,)).fetchone()\n    return row[0]\n"
+  },
+  "notes": "A small database query module with one counting function."
+}

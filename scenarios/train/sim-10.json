@@ -1,0 +1,14 @@
+{
+  "id": "sim-10",
+  "kind": "edge",
+  "split": "train",
+  "title": "A developer adds a small helper that names exported CSV files, with no web route attached. Expected: no problem, since it is not a publicly reachable endpoint.",
+  "diff": "--- a/app/utils/export_csv.py\n+++ b/app/utils/export_csv.py\n@@ -9,2 +9,6 @@\n     writer.writerows(rows)\n     return buf.getvalue()\n+\n+\n+def csv_filename(report: str, day: str) -> str:\n+    return f\"{report}_{day}.csv\"\n",
+  "answer_key": {
+    "expected": [],
+    "must_not_flag": [
+      "auth-required"
+    ]
+  },
+  "approved_by_user": false
+}

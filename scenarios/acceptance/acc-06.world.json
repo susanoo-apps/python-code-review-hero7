@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/main.py": "from fastapi import FastAPI, Depends\nfrom app.routers import reviews, health\nfrom app.auth import require_user\n\napp = FastAPI()\napp.include_router(reviews.router, dependencies=[Depends(require_user)])\napp.include_router(health.router)\n"
+  },
+  "notes": "The FastAPI app entry point that mounts the reviews and health routers."
+}

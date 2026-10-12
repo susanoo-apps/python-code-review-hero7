@@ -1,0 +1,6 @@
+{
+  "files": {
+    "services/auth/session.py": "from app.db import get_connection\n\n\ndef find_session(token_id: str):\n    conn = get_connection()\n    return conn.execute(\"SELECT * FROM sessions WHERE id = %s\", (token_id,)).fetchone()\n\n\ndef sessions_for_user(user_id: int):\n    conn = get_connection()\n    query = f\"SELECT * FROM sessions WHERE user_id = {user_id} ORDER BY created_at\"\n    return conn.execute(query).fetchall()\n"
+  },
+  "notes": "A small session module with a lookup helper and a new listing helper."
+}

@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/utils/export_csv.py": "import csv\nimport io\n\n\ndef rows_to_csv(rows, columns):\n    \"\"\"Serialise rows as CSV text, with a header line built from columns.\"\"\"\n    buf = io.StringIO()\n    writer = csv.writer(buf)\n    writer.writerow(columns)\n    for row in rows:\n        writer.writerow([row[c] for c in columns])\n    return buf.getvalue()\n"
+  },
+  "notes": "A small helper that turns rows into CSV text."
+}

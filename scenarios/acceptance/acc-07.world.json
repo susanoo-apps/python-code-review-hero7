@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/settings.py": "import os\n\nPRICING_KEY = os.environ[\"PRICING_API_KEY\"]\n\nDATABASE_URL = os.environ.get(\"DATABASE_URL\", \"\")\n"
+  },
+  "notes": "The settings module that reads configuration from environment variables."
+}

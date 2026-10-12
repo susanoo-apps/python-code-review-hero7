@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/routes/orders.py": "from fastapi import APIRouter, Depends\n\nfrom app.auth import require_user\nfrom app.db import get_connection\n\nrouter = APIRouter()\n\n\n@router.get(\"/orders/{order_id}\")\ndef get_order(order_id: int, user=Depends(require_user)):\n    return get_connection().execute(\"SELECT * FROM orders WHERE id = %s\", (order_id,)).fetchone()\n\n\n@router.get(\"/orders\")\ndef list_orders(status: str, user=Depends(require_user)):\n    query = (\n        \"SELECT id, total, status FROM orders \"\n        \"WHERE status = %s ORDER BY created_at DESC\"\n    )\n    return get_connection().execute(query, (status,)).fetchall()\n"
+  },
+  "notes": "An orders router with a single-order lookup and a new list endpoint."
+}

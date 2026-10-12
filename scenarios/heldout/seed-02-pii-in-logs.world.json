@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/routes/signup.py": "import logging\n\nfrom app.models.user import User\n\nlogger = logging.getLogger(__name__)\n\n\ndef register(email: str, name: str) -> User:\n    user = User(email=email, name=name)\n    user.save()\n    logger.info(\"New signup: %s\", user.email)\n    return user\n"
+  },
+  "notes": "A signup route that creates a user and saves it."
+}

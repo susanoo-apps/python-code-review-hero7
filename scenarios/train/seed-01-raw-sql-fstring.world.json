@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/db/queries.py": "from app.db.connection import get_connection\n\n\ndef get_order(order_id: int):\n    conn = get_connection()\n    return conn.execute(\"SELECT * FROM orders WHERE id = %s\", (order_id,)).fetchone()\n\n\ndef search_orders(customer_name: str):\n    conn = get_connection()\n    query = f\"SELECT * FROM orders WHERE customer = '{customer_name}'\"\n    return conn.execute(query).fetchall()\n"
+  },
+  "notes": "A small order-queries module with a parameterised lookup and a new name search."
+}

@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/db/users.py": "from app.db import base\n\n\ndef find_user(conn, name):\n    query = f\"SELECT * FROM users WHERE name = '{name}'\"\n    return conn.execute(query)\n\n\ndef list_users(conn):\n    return conn.execute(\"SELECT * FROM users ORDER BY id\")\n"
+  },
+  "notes": "A small users data-access module with lookup and listing helpers."
+}

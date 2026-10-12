@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/services/pricing.py": "# Pricing helpers\nimport httpx\n\ndef fetch_rate(currency):\n    resp = httpx.get(f\"https://rates.example.com/{currency}\")\n    return resp.json()[\"rate\"]\n\n\ndef convert(amount, rate):\n    return round(amount * rate, 2)\n"
+  },
+  "notes": "A pricing service that looks up currency rates and converts amounts."
+}

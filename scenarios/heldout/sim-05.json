@@ -1,0 +1,20 @@
+{
+  "id": "sim-05",
+  "kind": "planted",
+  "split": "heldout",
+  "title": "A developer adds a helper that sends a welcome email by calling an outside mail service and ignores whether the call worked. Expected: warned that the outside call has no failure handling.",
+  "diff": "--- a/lib/notify/email_sender.py\n+++ b/lib/notify/email_sender.py\n@@ -6,3 +6,7 @@\n \n def build_payload(to: str, subject: str) -> dict:\n     return {\"to\": to, \"subject\": subject}\n+\n+\n+def send_welcome(to: str) -> None:\n+    httpx.post(MAIL_API_URL, json=build_payload(to, \"Welcome\"))\n",
+  "answer_key": {
+    "expected": [
+      {
+        "file": "lib/notify/email_sender.py",
+        "line_start": 12,
+        "line_end": 12,
+        "rule_id": "external-call-errors",
+        "severity": "warn"
+      }
+    ],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

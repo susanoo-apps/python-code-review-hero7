@@ -1,0 +1,14 @@
+{
+  "id": "acc-07",
+  "kind": "edge",
+  "split": "acceptance",
+  "title": "A developer loads the pricing API key from an environment variable instead of writing it in the file. Expected: nothing is flagged.",
+  "diff": "--- a/app/settings.py\n+++ b/app/settings.py\n@@ -1,2 +1,3 @@\n import os\n \n+PRICING_KEY = os.environ[\"PRICING_API_KEY\"]\n",
+  "answer_key": {
+    "expected": [],
+    "must_not_flag": [
+      "no-secrets"
+    ]
+  },
+  "approved_by_user": false
+}

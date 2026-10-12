@@ -1,0 +1,12 @@
+{
+  "id": "sim-19",
+  "kind": "clean",
+  "split": "train",
+  "title": "A developer adds a one-line description to the profile lookup so future readers know what it returns. Expected: no problems found.",
+  "diff": "--- a/backend/users/profile.py\n+++ b/backend/users/profile.py\n@@ -9,3 +9,4 @@\n @router.get(\"/users/me\")\n def read_me(user=Depends(require_user)):\n+    \"\"\"Return the signed-in user's profile.\"\"\"\n     return users.get(user.id)\n",
+  "answer_key": {
+    "expected": [],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

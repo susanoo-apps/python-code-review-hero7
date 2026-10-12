@@ -1,0 +1,20 @@
+{
+  "id": "sim-04",
+  "kind": "planted",
+  "split": "train",
+  "title": "A developer pastes a replica database password as a plain constant at the top of the query module. Expected: blocked under the rule against secrets written in code.",
+  "diff": "--- a/app/db/queries.py\n+++ b/app/db/queries.py\n@@ -1,7 +1,9 @@\n from app.db.connection import get_connection\n \n+REPLICA_PASSWORD = \"xK9-replica-pw-7741\"\n+\n \n def count_orders(customer_id: int) -> int:\n     conn = get_connection()\n     row = conn.execute(\"SELECT COUNT(*) FROM orders WHERE customer_id = %s\", (customer_id,)).fetchone()\n     return row[0]\n",
+  "answer_key": {
+    "expected": [
+      {
+        "file": "app/db/queries.py",
+        "line_start": 3,
+        "line_end": 3,
+        "rule_id": "no-secrets",
+        "severity": "block"
+      }
+    ],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

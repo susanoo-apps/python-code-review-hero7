@@ -1,0 +1,6 @@
+{
+  "files": {
+    "src/billing/invoices.py": "from fastapi import APIRouter, Depends\nfrom app.auth import require_user\nfrom app.services import billing\n\nrouter = APIRouter()\n\n\n@router.get(\"/invoices/{invoice_id}\")\ndef get_invoice(invoice_id: int, user=Depends(require_user)):\n    return billing.get_invoice(invoice_id)\n\n\n@router.post(\"/invoices/{invoice_id}/void\")\ndef void_invoice(invoice_id: int):\n    return billing.void(invoice_id)\n"
+  },
+  "notes": "A small billing module with invoice routes, one of which lacks a login check."
+}

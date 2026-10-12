@@ -1,0 +1,12 @@
+{
+  "id": "sim-18",
+  "kind": "clean",
+  "split": "train",
+  "title": "A developer adds a one-line description to a refund function, changing no behaviour. Expected: no problems found.",
+  "diff": "--- a/core/payments/refunds.py\n+++ b/core/payments/refunds.py\n@@ -4,3 +4,4 @@\n def issue_refund(payment_id: str, amount_cents: int) -> dict:\n+    \"\"\"Issue a refund for part or all of a payment, never more than was paid.\"\"\"\n     payment = ledger.find(payment_id)\n     if amount_cents > payment.amount_cents:\n",
+  "answer_key": {
+    "expected": [],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

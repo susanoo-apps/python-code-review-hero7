@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/utils/pricing.py": "BULK_THRESHOLD = 100\nBULK_DISCOUNT = 0.9\n\n\ndef subtotal(items: list[dict]) -> float:\n    return sum(item[\"price\"] * item[\"qty\"] for item in items)\n\n\ndef total_price(items: list[dict]) -> float:\n    total = subtotal(items)\n    if total > BULK_THRESHOLD:\n        total *= BULK_DISCOUNT\n    return total\n"
+  },
+  "notes": "A pricing utility module that computes order totals with a bulk discount."
+}

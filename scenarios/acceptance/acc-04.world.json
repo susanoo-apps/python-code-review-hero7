@@ -1,0 +1,6 @@
+{
+  "files": {
+    "app/config.py": "import os\n\nAPI_KEY = \"sk_test_FAKE0000000000\"\n\nDEBUG = os.environ.get(\"DEBUG\", \"0\") == \"1\"\n"
+  },
+  "notes": "The app's configuration module with environment-based settings."
+}

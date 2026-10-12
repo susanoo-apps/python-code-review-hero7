@@ -1,0 +1,20 @@
+{
+  "id": "sim-08",
+  "kind": "planted",
+  "split": "train",
+  "title": "A developer adds a refund lookup that pastes the order reference straight into the database query text. Expected: blocked under the rule against building queries from raw text.",
+  "diff": "--- a/core/payments/refunds.py\n+++ b/core/payments/refunds.py\n@@ -4,3 +4,9 @@\n def find_refund(refund_id: int):\n     conn = connect()\n     return conn.execute(\"SELECT * FROM refunds WHERE id = %s\", (refund_id,)).fetchone()\n+\n+\n+def refunds_for_order(order_ref: str):\n+    conn = connect()\n+    query = \"SELECT * FROM refunds WHERE order_ref = '\" + order_ref + \"'\"\n+    return conn.execute(query).fetchall()\n",
+  "answer_key": {
+    "expected": [
+      {
+        "file": "core/payments/refunds.py",
+        "line_start": 11,
+        "line_end": 11,
+        "rule_id": "no-raw-sql",
+        "severity": "block"
+      }
+    ],
+    "must_not_flag": []
+  },
+  "approved_by_user": false
+}

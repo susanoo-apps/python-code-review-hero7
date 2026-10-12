@@ -1,0 +1,14 @@
+{
+  "id": "acc-06",
+  "kind": "edge",
+  "split": "acceptance",
+  "title": "A developer adds a login check to the reviews router as a whole, so every route under it is covered. Expected: nothing is flagged.",
+  "diff": "--- a/app/main.py\n+++ b/app/main.py\n@@ -5,3 +5,3 @@\n app = FastAPI()\n-app.include_router(reviews.router)\n+app.include_router(reviews.router, dependencies=[Depends(require_user)])\n app.include_router(health.router)\n",
+  "answer_key": {
+    "expected": [],
+    "must_not_flag": [
+      "auth-required"
+    ]
+  },
+  "approved_by_user": false
+}
